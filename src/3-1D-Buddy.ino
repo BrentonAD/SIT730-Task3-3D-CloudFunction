@@ -14,18 +14,39 @@ void eventHandler(const char *event, const char *data){
   i++;
   Log.info("%d: event=%s data=%s", i, event, (data ? data : "NULL"));
 
-  // Blink LED 3 times
-  digitalWrite(LED_PIN, HIGH);
-  delay(500);
-  digitalWrite(LED_PIN, LOW);
-  delay(500);
-  digitalWrite(LED_PIN, HIGH);
-  delay(500);
-  digitalWrite(LED_PIN, LOW);
-  delay(500);
-  digitalWrite(LED_PIN, HIGH);
-  delay(500);
-  digitalWrite(LED_PIN, LOW);
+  if (strcmp(data, "wave") == 0){
+    // Blink LED 3 times evenly
+    digitalWrite(LED_PIN, HIGH);
+    delay(500);
+    digitalWrite(LED_PIN, LOW);
+    delay(500);
+    digitalWrite(LED_PIN, HIGH);
+    delay(500);
+    digitalWrite(LED_PIN, LOW);
+    delay(500);
+    digitalWrite(LED_PIN, HIGH);
+    delay(500);
+    digitalWrite(LED_PIN, LOW);
+  }
+  else if (strcmp(data, "pat") == 0)
+  {
+    // Blink LED 3 times in ..- pattern
+    digitalWrite(LED_PIN, HIGH);
+    delay(250);
+    digitalWrite(LED_PIN, LOW);
+    delay(250);
+    digitalWrite(LED_PIN, HIGH);
+    delay(250);
+    digitalWrite(LED_PIN, LOW);
+    delay(250);
+    digitalWrite(LED_PIN, HIGH);
+    delay(1000);
+    digitalWrite(LED_PIN, LOW);
+  }
+  else
+  {
+    Log.info("Unkown event data. Known actions: 'wave' or 'pat'");
+  }
 }
 
 void setup() {
